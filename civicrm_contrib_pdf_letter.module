@@ -1,0 +1,32 @@
+<?php
+
+function civicrm_contrib_pdf_letter_civicrm_config( &$config ) {
+    $template =& CRM_Core_Smarty::singleton( );
+    
+    $ddRoot = dirname( __FILE__ );
+    
+    $ddDir = $ddRoot . DIRECTORY_SEPARATOR . 'templates';
+    
+    if ( is_array( $template->template_dir ) ) {
+        array_unshift( $template->template_dir, $ddDir );
+    } else {
+        $template->template_dir = array( $ddDir, $template->template_dir );
+    }
+    
+    // also fix php include path
+    $include_path = $ddRoot . PATH_SEPARATOR . get_include_path( );
+    set_include_path( $include_path );
+}
+
+
+function civicrm_contrib_pdf_letter_civicrm_searchTasks($objectType, &$tasks ) {
+
+    if ( $objectType == 'contribution' ) {
+        $tasks['pdfletter'] = array(
+          'title' => t('Send PDF Letter for each contribution'),
+          'class' => 'CRM_Contribute_Form_Task_PDFLetter',
+        );
+    }
+
+}
+

@@ -1,0 +1,7 @@
+name = Action Contribution PDF Letter for CiviCRM
+description = Custom action to create one pdf letter for each contribution with specific contribution token
+dependencies[] = civicrm
+package = CiviCRM
+core = 6.x
+version = 1.0
+
